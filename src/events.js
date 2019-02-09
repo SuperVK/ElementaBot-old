@@ -12,6 +12,8 @@ module.exports = {
         let commandFunc = client.commands.find(cmd => cmd.aliases.includes(command))
         if(commandFunc == undefined) return
         if(client.discmds.includes(commandFunc.aliases[0]) && message.author.id !== client.ownerID) return message.channel.createMessage('This command is disabled right now')
+
+        //get DB user
         let user = await client.getUser(message.author.id)
         if(user == null) {
             user = client.createUser(message.author.id)
@@ -21,6 +23,9 @@ module.exports = {
             client.saveUser(user)
         }
         commandFunc.run(message, client, user)
+            .catch(e => {
+                message.channel.createMessage(`Something went wrong please try again later!`)
+            })
         
     }
 }

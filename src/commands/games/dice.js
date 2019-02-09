@@ -1,7 +1,7 @@
 module.exports = {
     aliases: ['dice', 'd'],
     desc: 'Run the command without any arguments for more info.',
-    run: function(message, client, user) {
+    run: async function(message, client, user) {
         let args = message.args
         if(args[0] == undefined) {
             message.channel.createMessage(`**Let\'s throw a dice.**

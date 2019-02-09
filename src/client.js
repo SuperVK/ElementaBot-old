@@ -31,6 +31,8 @@ class Client {
 
         this.dbConn = null
 
+        this.guildInvitations = []
+
         this.playerRoleID = ids.playerRole
         this.ownerID = ids.owner
         this.adminRoleID = ids.adminRole
@@ -69,6 +71,11 @@ class Client {
     async getUser(id, noInsert) {
         let res = await this.dbConn.query('SELECT * FROM users WHERE id=?', [id])
         if(res.length == 0) return null
+        let user = res[0]
+        if(user.guild != null) {
+            //convert guild ID to actual guild object
+            user.guild = await this.getGuild(user.guild)
+        }
         return res[0]
 
     }
@@ -80,12 +87,14 @@ class Client {
     }
 
     async saveUser(user) {
-        this.dbConn.query('UPDATE users SET balance=? WHERE id=?', [user.balance, user.id])
+        if(user.guild != null) user.guild = user.guild.id
+        else user.guild = null
+        this.dbConn.query('UPDATE users SET balance=?, guild=? WHERE id=?', [user.balance, user.guild, user.id])
     }
 
     async createGuild(name, ownerID) {
         let id = this._generateRandomCode()
-        this.dbConn.query('INSERT INTO guilds VALUES (?, ?, ?, ?, ?)', [name, JSON.stringify([ownerID]), this._generateRandomCode(), 50, ownerID])
+        this.dbConn.query('INSERT INTO guilds VALUES (?, ?, ?, ?, ?)', [name, JSON.stringify([ownerID]), id, 50, ownerID])
         this.dbConn.query('UPDATE users SET guild=? WHERE id=?', [id, ownerID])
     }
 
@@ -94,12 +103,14 @@ class Client {
         if(res.length == 0) {
             return null
         }
+        let guild = res[0]
+        guild.users = JSON.parse(guild.users)
         return res[0]
 
     }
 
-    async saveGuild(user) {
-        this.dbConn.query('UPDATE users SET balance=? WHERE id=?', [user.balance, user.id])
+    async saveGuild(guild) {
+        this.dbConn.query('UPDATE guilds SET balance=?, users=? WHERE id=?', [guild.balance, JSON.stringify(guild.users), guild.id])
     }
 
     _generateRandomCode() {

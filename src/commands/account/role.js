@@ -1,7 +1,7 @@
 module.exports = {
     desc: 'Gives you the Player role',
     aliases: ['role'],
-    run: function(message, args) {
+    run: async function(message, args) {
         if(args[0] == undefined) return message.channel.createMessage(`What role do you want to be given?`)
         switch (args[0]) {
             case 'player':

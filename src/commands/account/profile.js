@@ -15,9 +15,10 @@ module.exports = {
             targetID = message.author.id
         }
         user = await client.getUser(targetID, true)
-
-        message.channel.createMessage(`The profile of **${message.member.guild.members.find(m => m.id == targetID).username}**
+        let disUser = await client.bot.getRESTUser(targetID)
+        message.channel.createMessage(`The profile of **${disUser.username}**
 Gold: ${user.balance} <:gold:543746706630639617>
+Guild: ${user.guild ?  user.guild.name : 'None'}
 Account created: ${new Date(user.signup_date).toLocaleDateString('en-EN', { year: 'numeric', month: 'long', day: 'numeric' })}
         `)
         

@@ -9,7 +9,7 @@ function clean(text) {
 module.exports = {
     aliases: ['eval'],
     desc: 'Nothing',
-    run: function (message, client, user) {
+    run: async function (message, client, user) {
         if (message.author.id !== '235450656335331328') return
         let code;
         try {

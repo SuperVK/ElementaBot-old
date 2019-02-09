@@ -3,7 +3,7 @@ const privateCmds = ['eval', 'admin']
 module.exports = {
     desc: 'Here you can find all of the the commands, but as you\'re reading this, so you already know that!',
     aliases: ['commands', 'cmds'],
-    run: function(message, client) {
+    run: async function(message, client) {
         if(message.args[0] == undefined) {
             let msg = `All the commands:\n\n`
             for(let command of client.commands) {
