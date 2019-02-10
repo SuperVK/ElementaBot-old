@@ -30,13 +30,23 @@ module.exports = {
                 if(invite == undefined) return message.channel.createMessage(`You haven't been invited! Maybe it ran it out?`)
                 client.guildInvitations.splice(index, 1)
                 let guild = await client.getGuild(invite.guildID)
-                guild.users.push(message.author.id)
+                guild.members.push(message.author.id)
                 user.guild = guild
                 message.channel.createMessage(`Successfully joined **${guild.name}**`)
                 client.saveUser(user)
                 client.saveGuild(guild)
                 break;
 
+            }
+            case 'leave': {
+                if(user.guild.owner == message.author.id) return message.channel.createMessage(`You can't leave your own guild!`)
+                let guild = user.guild
+                user.guild.members.splice(user.guild.members.findIndex(id => id == message.author.id), 1)
+                await client.saveGuild(user.guild)
+                user.guild = null
+                client.saveUser(user)
+                message.channel.createMessage(`Succesfully left ${guild.name}`)
+                break;
             }
             case 'create': {
                 if(message.args[1] == undefined) return message.channel.createMessage('You need to specify a name!')
@@ -45,9 +55,16 @@ module.exports = {
                 message.channel.createMessage(`Successfully created your guild!`)
                 break;
             }
+            case 'members': {
+                if(user.guild == null) return message.channel.createMessage(`You aren't in a guild, make one or join one!`)
+
+            }
             default: {
                 if(user.guild == null) return message.channel.createMessage(`You aren't in a guild yet, make one or join one!`)
-                message.channel.createMessage(`**${user.guild.name}**`)
+                message.channel.createMessage(`**${user.guild.name}**
+Members: ${user.guild.members.length}/7
+Balance: ${user.guild.}
+                `)
             }
         }
     }

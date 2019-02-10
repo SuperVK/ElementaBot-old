@@ -104,7 +104,7 @@ class Client {
             return null
         }
         let guild = res[0]
-        guild.users = JSON.parse(guild.users)
+        guild.members = JSON.parse(guild.members)
         return res[0]
 
     }
