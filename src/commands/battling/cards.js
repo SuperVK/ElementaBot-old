@@ -6,7 +6,7 @@ module.exports = {
             let msg = `**All the elements:**\n\n`
             let elements = Object.keys(client.elements)
             for(let element of elements) {
-                msg += `> ${element}\n`
+                msg += `> ${client.elements[message.args[0]].name}\n`
             }
             msg += `Do .cards *element* to get all the heroes in those elements`
             message.channel.createMessage(msg)
