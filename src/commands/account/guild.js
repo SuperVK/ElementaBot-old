@@ -34,6 +34,7 @@ module.exports = {
                 guild.members.push(message.author.id)
                 user.guild = guild
                 message.member.addRole(guild.roleID)
+                message.member.addRole('543546856999878657')
                 message.channel.createMessage(`Successfully joined **${guild.name}**`)
                 client.saveUser(user)
                 client.saveGuild(guild)
@@ -76,6 +77,7 @@ module.exports = {
                 let name = message.content.substring(message.content.split(' ')[0].length + 1 + message.args[0].length + 1)
                 let role = await message.channel.guild.createRole({name: name})
                 message.member.addRole(role.id)
+                message.member.addRole('543185788565848085')
                 client.createGuild(name, message.author.id, role.id)
                 message.channel.createMessage(`Successfully created your guild!`)
                 break;
