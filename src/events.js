@@ -16,11 +16,11 @@ module.exports = {
         //get DB user
         let user = await client.getUser(message.author.id)
         if(user == null) {
-            user = client.createUser(message.author.id)
+            user = await client.createUser(message.author.id)
         }
         if(user.balance == 0) {
             user.balance = 100
-            client.saveUser(user)
+            await client.saveUser(user)
         }
         commandFunc.run(message, client, user)
             .catch(e => {
