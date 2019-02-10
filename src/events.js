@@ -24,6 +24,7 @@ module.exports = {
         }
         commandFunc.run(message, client, user)
             .catch(e => {
+                console.log(e)
                 message.channel.createMessage(`Something went wrong please try again later!`)
             })
         

@@ -2,14 +2,14 @@ module.exports = {
     desc: 'Join a planet',
     aliases: ['guild', 'g'],
     run: async function(message, client, user) {
+        if(user.guild == null && message.args[0] != 'create' && message.args[0] != 'join') return message.channel.createMessage(`You aren't in a guild, make one (.guild create name) or join one (get invited with .guild invite)`)
         switch(message.args[0]) {
             case 'invite': {
                 if(message.args[1] == undefined || message.args[1].match(/\d{17,18}/) == undefined) return message.channel.createMessage('Tag the user you want to invite!')
-                if(user.guild == null) return message.channel.createMessage(`You must be in a guild to do this!`)
                 if(user.guild.owner != message.author.id) return message.channel.createMessage(`You must be the owner to do this!`)
-
+                if(user.guild.members.length >= 7) return message.channel.createMessage(`You can only have a maxium of 7 people in your guild!`)
                 targetID = message.args[1].match(/\d{17,18}/)[0]
-                client.guildInvitations.push({
+                client.guildData.invitations.push({
                     guildID: user.guild.id,
                     userID: targetID
                 })
@@ -17,7 +17,7 @@ module.exports = {
                 setTimeout(async function() {
                     let index = client.guildInvitations.findIndex((i) => i.userID == targetID && i.guildID == user.guild.id)
                     if(index == -1) return
-                    client.guildInvitations.splice(index, 1)
+                    client.guildData.invitations.splice(index, 1)
                     let disUser = await client.bot.getRESTUser(targetID)
                     message.channel.createMessage(`${disUser.username} didn't respond in time and the invite has been canceled!`)
                 }, 60*1000)
@@ -25,10 +25,11 @@ module.exports = {
 
             }
             case 'join': {
-                let index = client.guildInvitations.findIndex(i => i.userID == message.author.id)
-                let invite = client.guildInvitations[index]
+                if(user.guild != null) return message.channel.createMessage(`You're already in a guild! Leave that one first (\`.guild leave\`)`)
+                let index = client.guildData.invitations.findIndex(i => i.userID == message.author.id)
+                let invite = client.guildData.invitations[index]
                 if(invite == undefined) return message.channel.createMessage(`You haven't been invited! Maybe it ran it out?`)
-                client.guildInvitations.splice(index, 1)
+                client.guildData.invitations.splice(index, 1)
                 let guild = await client.getGuild(invite.guildID)
                 guild.members.push(message.author.id)
                 user.guild = guild
@@ -48,6 +49,27 @@ module.exports = {
                 message.channel.createMessage(`Succesfully left ${guild.name}`)
                 break;
             }
+            case 'disband': 
+            case 'delete': {
+                if(user.guild.owner != message.author.id) return message.channel.createMessage(`Only the guild owner can delete guilds!`)
+                if(client.guildData.deleteRequests.find(g => g == user.guild.id) == undefined) {
+                    client.guildData.deleteRequests.push(user.guild.id)
+                    message.channel.createMessage(`Are you sure you want to delete your guild? Doing this will kick all members. If you are sure, run .guild ${message.args[0]} again!`)
+                } else {
+                    client.guildData.deleteRequests.splice(client.guildData.deleteRequests.findIndex(g => g == user.guild.id), 1)
+                    for(let memberID of user.guild.members) {
+                        let gUser = await client.getUser(memberID)
+                        gUser.guild = null
+                        client.saveUser(gUser)
+                    }
+                    client.deleteGuild(user.guild.id)
+                    message.channel.createMessage(`Successfully deleted ${user.guild.name}`)
+                    user.guild = null
+                    client.saveUser(user)
+                    
+                }
+                break;
+            }
             case 'create': {
                 if(message.args[1] == undefined) return message.channel.createMessage('You need to specify a name!')
                 let name = message.content.substring(message.content.split(' ')[0].length + 1 + message.args[0].length + 1)
@@ -56,14 +78,12 @@ module.exports = {
                 break;
             }
             case 'members': {
-                if(user.guild == null) return message.channel.createMessage(`You aren't in a guild, make one or join one!`)
 
             }
             default: {
-                if(user.guild == null) return message.channel.createMessage(`You aren't in a guild yet, make one or join one!`)
                 message.channel.createMessage(`**${user.guild.name}**
 Members: ${user.guild.members.length}/7
-Balance: ${user.guild.}
+Balance: ${user.guild.balance}
                 `)
             }
         }

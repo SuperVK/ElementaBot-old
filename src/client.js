@@ -31,7 +31,10 @@ class Client {
 
         this.dbConn = null
 
-        this.guildInvitations = []
+        this.guildData = {
+            invitations: [],
+            deleteRequests: []
+        }
 
         this.playerRoleID = ids.playerRole
         this.ownerID = ids.owner
@@ -109,8 +112,12 @@ class Client {
 
     }
 
+    deleteGuild(id) {
+        this.dbConn.query('DELETE FROM guilds WHERE id=?', [id])
+    }
+
     async saveGuild(guild) {
-        this.dbConn.query('UPDATE guilds SET balance=?, users=? WHERE id=?', [guild.balance, JSON.stringify(guild.users), guild.id])
+        this.dbConn.query('UPDATE guilds SET balance=?, members=? WHERE id=?', [guild.balance, JSON.stringify(guild.members), guild.id])
     }
 
     _generateRandomCode() {
