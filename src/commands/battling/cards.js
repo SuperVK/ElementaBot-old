@@ -6,7 +6,7 @@ module.exports = {
             let msg = `**All the elements:**\n\n`
             let elements = Object.keys(client.elements)
             for(let element of elements) {
-                msg += `>${element}\n`
+                msg += `> ${element}\n`
             }
             msg += `Do .cards *element* to get all the heroes in those elements`
             message.channel.createMessage(msg)
@@ -16,7 +16,8 @@ module.exports = {
             let heroes = Object.keys(client.elements[message.args[0]])
             let msg = `**All the heroes in ${message.args[0]}:**\n\n`
             for(let hero of heroes) {
-                msg += `>${hero}\n`
+                let heroName = client.elements[message.args[0]][hero].name
+                msg += `> ${heroName}\n`
             }
             msg += `Do .cards ${message.args[0]} hero to get the hero in those elements`
             message.channel.createMessage(msg)
