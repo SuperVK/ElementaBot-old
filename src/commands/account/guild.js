@@ -45,6 +45,7 @@ module.exports = {
                 if(user.guild.owner == message.author.id) return message.channel.createMessage(`You can't leave your own guild!`)
                 let guild = user.guild
                 message.member.removeRole(guild.roleID)
+                message.member.removeRole('543546856999878657')
                 user.guild.members.splice(user.guild.members.findIndex(id => id == message.author.id), 1)
                 await client.saveGuild(user.guild)
                 user.guild = null
@@ -59,6 +60,7 @@ module.exports = {
                     client.guildData.deleteRequests.push(user.guild.id)
                     message.channel.createMessage(`Are you sure you want to delete your guild? Doing this will kick all members. If you are sure, run .guild ${message.args[0]} again!`)
                 } else {
+                    message.member.removeRole('543185788565848085')
                     client.guildData.deleteRequests.splice(client.guildData.deleteRequests.findIndex(g => g == user.guild.id), 1)
                     for(let memberID of user.guild.members) {
                         let gUser = await client.getUser(memberID)
@@ -78,6 +80,7 @@ module.exports = {
                 let name = message.content.substring(message.content.split(' ')[0].length + 1 + message.args[0].length + 1)
                 let role = await message.channel.guild.createRole({name: name})
                 message.member.addRole(role.id)
+                message.member.addRole('543546856999878657')
                 message.member.addRole('543185788565848085')
                 client.createGuild(name, message.author.id, role.id)
                 message.channel.createMessage(`Successfully created your guild!`)
