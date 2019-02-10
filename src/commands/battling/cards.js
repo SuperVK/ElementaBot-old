@@ -33,6 +33,7 @@ module.exports = {
             message.channel.createMessage({
                 embed: {
                     title: client.elements[message.args[0]][heroName].name,
+                    color: parseInt(client.elementColors[message.args[0]].substring(1), 16),
                     image: {
                         url: client.elements[message.args[0]][heroName].url
                     }

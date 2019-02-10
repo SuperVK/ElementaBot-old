@@ -31,6 +31,7 @@ class Client {
         this.users = []
 
         this.elements = {}
+        this.elementColors = require(path.join(__dirname, '../data/elements.json'))
 
         this.dbConn = null
 
@@ -61,6 +62,7 @@ class Client {
     loadHeroes() {
         var elements = fs.readdirSync(path.join(__dirname, '/../data'))
         for(let element of elements) {
+            if(element.includes('.')) continue
             this.elements[element] = {}
             let heroes = fs.readdirSync(path.join(__dirname, `/../data/${element}`))
             
