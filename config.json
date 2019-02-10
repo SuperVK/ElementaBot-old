@@ -1,6 +1,6 @@
 {
     "prefix": ".",
-    "discmds": ["attack", "dice"],
+    "discmds": ["attack"],
     "ids": {
         "playerRole": "543162803981385728",
         "adminRole": "543152954488782848",
