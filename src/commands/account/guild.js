@@ -43,8 +43,8 @@ module.exports = {
             }
             case 'leave': {
                 if(user.guild.owner == message.author.id) return message.channel.createMessage(`You can't leave your own guild!`)
-                message.member.removeRole(guild.roleID)
                 let guild = user.guild
+                message.member.removeRole(guild.roleID)
                 user.guild.members.splice(user.guild.members.findIndex(id => id == message.author.id), 1)
                 await client.saveGuild(user.guild)
                 user.guild = null
