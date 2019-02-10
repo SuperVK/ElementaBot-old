@@ -1,6 +1,7 @@
 const Eris = require('eris')
 const fs = require('fs')
 const mariadb = require('mariadb')
+const path = require('path')
 const events = require('./events.js')
 
 /** 
@@ -29,6 +30,8 @@ class Client {
 
         this.users = []
 
+        this.elements = {}
+
         this.dbConn = null
 
         this.guildData = {
@@ -54,12 +57,27 @@ class Client {
             }
         }
     }
+
+    loadHeroes() {
+        var elements = fs.readdirSync(path.join(__dirname, '/../data'))
+        for(let element of elements) {
+            this.elements[element] = {}
+            let heroes = fs.readdirSync(path.join(__dirname, `/../data/${element}`))
+            
+            for(let hero of heroes) {
+                if(!hero.includes('.')) continue
+                let heroName = hero.split('.')[0].replace('_', ' ').replace('-', '.').toLowerCase()
+                this.elements[element][heroName] = require(path.join(__dirname, `/../data/${element}/${hero}`))
+            }
+        }
+    }
     /**
      * Starts the bot
      */
     async start() {
         
         this.loadCommands()
+        this.loadHeroes()
         this.bot.on('ready', () => console.log('Ready!'))
         this.bot.on('error', console.error)
         this.bot.on('messageCreate', (message) => {
