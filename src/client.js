@@ -95,9 +95,9 @@ class Client {
         this.dbConn.query('UPDATE users SET balance=?, guild=? WHERE id=?', [user.balance, user.guild, user.id])
     }
 
-    async createGuild(name, ownerID) {
+    async createGuild(name, ownerID, roleID) {
         let id = this._generateRandomCode()
-        this.dbConn.query('INSERT INTO guilds VALUES (?, ?, ?, ?, ?)', [name, JSON.stringify([ownerID]), id, 50, ownerID])
+        this.dbConn.query('INSERT INTO guilds VALUES (?, ?, ?, ?, ?, ?)', [name, JSON.stringify([ownerID]), id, 50, ownerID, roleID])
         this.dbConn.query('UPDATE users SET guild=? WHERE id=?', [id, ownerID])
     }
 

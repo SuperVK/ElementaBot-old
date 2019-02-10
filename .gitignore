@@ -62,6 +62,7 @@ typings/
 .next
 
 # config
+config.json
 json.sqlite
 startdb.bat
 archived-code.*

@@ -1,5 +1,5 @@
 module.exports = {
-    desc: 'Join a planet',
+    desc: 'Join a guild',
     aliases: ['guild', 'g'],
     run: async function(message, client, user) {
         if(user.guild == null && message.args[0] != 'create' && message.args[0] != 'join') return message.channel.createMessage(`You aren't in a guild, make one (.guild create name) or join one (get invited with .guild invite)`)
@@ -15,7 +15,7 @@ module.exports = {
                 })
                 message.channel.createMessage(`<@${targetID}> you've been invited to **${user.guild.name}**, do \`.guild join\` to join! Invitation runs out in 60 seconds!`)
                 setTimeout(async function() {
-                    let index = client.guildInvitations.findIndex((i) => i.userID == targetID && i.guildID == user.guild.id)
+                    let index = client.guildData.invitations.findIndex((i) => i.userID == targetID && i.guildID == user.guild.id)
                     if(index == -1) return
                     client.guildData.invitations.splice(index, 1)
                     let disUser = await client.bot.getRESTUser(targetID)
@@ -33,6 +33,7 @@ module.exports = {
                 let guild = await client.getGuild(invite.guildID)
                 guild.members.push(message.author.id)
                 user.guild = guild
+                message.member.addRole(guild.roleID)
                 message.channel.createMessage(`Successfully joined **${guild.name}**`)
                 client.saveUser(user)
                 client.saveGuild(guild)
@@ -73,7 +74,9 @@ module.exports = {
             case 'create': {
                 if(message.args[1] == undefined) return message.channel.createMessage('You need to specify a name!')
                 let name = message.content.substring(message.content.split(' ')[0].length + 1 + message.args[0].length + 1)
-                client.createGuild(name, message.author.id)
+                let role = await message.channel.guild.createRole({name: name})
+                message.member.addRole(role.id)
+                client.createGuild(name, message.author.id, role.id)
                 message.channel.createMessage(`Successfully created your guild!`)
                 break;
             }

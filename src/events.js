@@ -6,7 +6,7 @@ module.exports = {
         if(message.author.bot) return
         if(!message.content.startsWith(client.prefix)) return
 
-        let [command, ...args] = message.content.toLowerCase().substring(client.prefix.length).split(' ')
+        let [command, ...args] = message.content.toLowerCase().substring(client.prefix.length).trim().replace(/\s{2,}/g,' ').split(' ')
         message.args = args
         if(!message.member.roles.includes(client.playerRoleID) && command != 'role') return message.channel.createMessage('You need a players role!')
         let commandFunc = client.commands.find(cmd => cmd.aliases.includes(command))

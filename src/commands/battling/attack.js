@@ -3,11 +3,10 @@ const Battle = require('../../structures/battle.js')
 module.exports = {
     desc: 'Attack some thicc as boiii',
     aliases: ['attack', 'att'],
-    run: async function(message, args, client, user) {
+    run: async function(message, client, user) {
         let opponent = message.mentions[0]
         
         if(opponent == undefined) return message.channel.createMessage('Who do you want to attack?')
-        if(user.inventory.tickets <= 0) return message.channel.createMessage(`You don't have enough tickets to fight!`)
         let options = {
             detailMode: user.detailMode
         }
