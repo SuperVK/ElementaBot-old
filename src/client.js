@@ -30,8 +30,8 @@ class Client {
 
         this.users = []
 
-        this.elements = {}
-        this.elementColors = require(path.join(__dirname, '../data/elements.json'))
+        this.heroes = []
+        this.elements = require(path.join(__dirname, '../data/elements.json'))
 
         this.dbConn = null
 
@@ -63,13 +63,12 @@ class Client {
         var elements = fs.readdirSync(path.join(__dirname, '/../data'))
         for(let element of elements) {
             if(element.includes('.')) continue
-            this.elements[element] = {}
             let heroes = fs.readdirSync(path.join(__dirname, `/../data/${element}`))
             
             for(let hero of heroes) {
                 if(!hero.includes('.')) continue
                 let heroName = hero.split('.')[0].replace('_', ' ').replace('-', '.').toLowerCase()
-                this.elements[element][heroName] = require(path.join(__dirname, `/../data/${element}/${hero}`))
+                this.heroes.push(require(path.join(__dirname, `/../data/${element}/${hero}`)))
             }
         }
     }
