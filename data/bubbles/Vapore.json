@@ -1,5 +1,6 @@
 {
     "name": "Vapore",
+    "element": "Bubbles",
     "hp": "3800",
     "attack": "220",
     "energy": "50",

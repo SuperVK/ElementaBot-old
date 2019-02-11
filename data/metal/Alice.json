@@ -1,5 +1,6 @@
 {
     "name": "Alice",
+    "element": "Metal",
     "hp": "3400",
     "attack": "260",
     "energy": "50",

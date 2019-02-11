@@ -1,5 +1,6 @@
 {
     "name": "Gringer",
+    "element": "Gravity",
     "hp": "3400",
     "attack": "260",
     "energy": "50",

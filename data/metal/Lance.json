@@ -1,5 +1,6 @@
 {
     "name": "Lance",
+    "element": "Metal",
     "hp": "3600",
     "attack": "240",
     "energy": "50",

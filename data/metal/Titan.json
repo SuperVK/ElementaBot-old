@@ -1,5 +1,6 @@
 {
     "name": "Titan",
+    "element": "Metal",
     "hp": "4600",
     "attack": "140",
     "energy": "50",

@@ -1,5 +1,6 @@
 {
     "name": "Erkroid",
+    "element": "Earth",
     "hp": "3000",
     "attack": "300",
     "energy": "50",

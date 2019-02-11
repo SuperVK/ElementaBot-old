@@ -1,5 +1,6 @@
 {
     "name": "Azuris",
+    "element": "Bubbles",
     "hp": "3200",
     "attack": "280",
     "energy": "50",

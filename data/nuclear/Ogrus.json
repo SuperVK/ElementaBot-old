@@ -1,5 +1,6 @@
 {
     "name": "Ogrus",
+    "element": "Nuclear",
     "hp": "4400",
     "attack": "160",
     "energy": "50",

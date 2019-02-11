@@ -1,5 +1,6 @@
 {
     "name": "Dead Iron",
+    "element": "Metal",
     "hp": "4800",
     "attack": "120",
     "energy": "50",

@@ -1,5 +1,6 @@
 {
     "name": "Shark Lord",
+    "element": "Bubbles",
     "hp": "5000",
     "attack": "100",
     "energy": "50",

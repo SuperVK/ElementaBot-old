@@ -1,5 +1,6 @@
 {
     "name": "Orc King",
+    "element": "Nuclear",
     "hp": "5000",
     "attack": "100",
     "energy": "50",

@@ -1,5 +1,6 @@
 {
     "name": "Stainless Steel",
+    "element": "Metal",
     "hp": "5200",
     "attack": "80",
     "energy": "50",

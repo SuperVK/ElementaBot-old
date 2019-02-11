@@ -1,5 +1,6 @@
 {
     "name": "Ghax",
+    "element": "Gravity",
     "hp": "3600",
     "attack": "240",
     "energy": "50",

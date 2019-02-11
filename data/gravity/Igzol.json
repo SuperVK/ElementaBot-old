@@ -1,5 +1,6 @@
 {
     "name": "Igzol",
+    "element": "Gravity",
     "hp": "3200",
     "attack": "280",
     "energy": "50",

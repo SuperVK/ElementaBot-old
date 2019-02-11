@@ -1,8 +1,26 @@
 {
-    "bubbles": "#0061ff",
-    "earth": "#421800",
-    "gravity": "#3400a5",
-    "heavens": "#f547ff",
-    "metal": "#dbdbdb",
-    "nuclear": "#d30000"
+    "bubbles": {
+        "color": "#0061ff",
+        "name": "Bubbles"
+    },
+    "earth": {
+        "color": "#421800",
+        "name": "Earth"
+    },
+    "gravity": {
+        "color": "#3400a5",
+        "name": "Gravity"
+    },
+    "heavens": {
+        "color": "#f547ff",
+        "name": "Heavens"
+    },
+    "metal": {
+        "color": "#dbdbdb",
+        "name": "Metal"
+    },
+    "nuclear": {
+        "color": "#d30000",
+        "name": "Nuclear"
+    }
 }
