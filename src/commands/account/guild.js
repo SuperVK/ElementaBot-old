@@ -87,7 +87,13 @@ module.exports = {
                 break;
             }
             case 'members': {
-
+                let msg = `**Members of ${user.guild.name}:**\n`
+                for(let member of user.guild.members) {
+                    let disUser = await client.bot.getRESTUser(member)
+                    msg += `> ${disUser.username}#${disUser.discriminator}\n`
+                }
+                message.channel.createMessage(msg)
+                break;
             }
             default: {
                 message.channel.createMessage(`**${user.guild.name}**
