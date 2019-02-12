@@ -4,7 +4,7 @@
     "heroes": [
         {
             "name": "Abysstalon",
-            "element": "Nuclear",
+            "pack": "Nuclear",
             "hp": "5000",
             "attack": "100",
             "energy": "50",
@@ -12,7 +12,7 @@
         },
         {
             "name": "Duho",
-            "element": "Nuclear",
+            "pack": "Nuclear",
             "hp": "3400",
             "attack": "260",
             "energy": "50",
@@ -20,7 +20,7 @@
         },
         {
             "name": "Farne",
-            "element": "Nuclear",
+            "pack": "Nuclear",
             "hp": "3200",
             "attack": "280",
             "energy": "50",
@@ -28,7 +28,7 @@
         },
         {
             "name": "Gnaal",
-            "element": "Nuclear",
+            "pack": "Nuclear",
             "hp": "4400",
             "attack": "160",
             "energy": "50",
@@ -36,7 +36,7 @@
         },
         {
             "name": "Ogrus",
-            "element": "Nuclear",
+            "pack": "Nuclear",
             "hp": "4400",
             "attack": "160",
             "energy": "50",
@@ -44,7 +44,7 @@
         },
         {
             "name": "Orc King",
-            "element": "Nuclear",
+            "pack": "Nuclear",
             "hp": "5000",
             "attack": "100",
             "energy": "50",

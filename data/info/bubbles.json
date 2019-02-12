@@ -4,7 +4,7 @@
     "heroes": [
         {
             "name": "Ansley",
-            "element": "Bubbles",
+            "pack": "Bubbles",
             "hp": "4400",
             "attack": "160",
             "energy": "50",
@@ -13,7 +13,7 @@
         },
         {
             "name": "Aquifis",
-            "element": "Bubbles",
+            "pack": "Bubbles",
             "hp": "2800",
             "attack": "320",
             "energy": "50",
@@ -21,7 +21,7 @@
         },
         {
             "name": "Azuris",
-            "element": "Bubbles",
+            "pack": "Bubbles",
             "hp": "3200",
             "attack": "280",
             "energy": "50",
@@ -29,7 +29,7 @@
         },
         {
             "name": "Shark Lord",
-            "element": "Bubbles",
+            "pack": "Bubbles",
             "hp": "5000",
             "attack": "100",
             "energy": "50",
@@ -37,7 +37,7 @@
         },
         {
             "name": "Tempestus",
-            "element": "Bubbles",
+            "pack": "Bubbles",
             "hp": "3400",
             "attack": "260",
             "energy": "50",
@@ -45,7 +45,7 @@
         },
         {
             "name": "Vapore",
-            "element": "Bubbles",
+            "pack": "Bubbles",
             "hp": "3800",
             "attack": "220",
             "energy": "50",

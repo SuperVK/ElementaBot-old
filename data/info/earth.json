@@ -4,7 +4,7 @@
     "heroes": [
         {
             "name": "Erkroid",
-            "element": "Earth",
+            "pack": "Earth",
             "hp": "3000",
             "attack": "300",
             "energy": "50",
@@ -12,7 +12,7 @@
         },
         {
             "name": "Klyts",
-            "element": "Earth",
+            "pack": "Earth",
             "hp": "3400",
             "attack": "260",
             "energy": "50",
@@ -20,7 +20,7 @@
         },
         {
             "name": "Medusa",
-            "element": "Earth",
+            "pack": "Earth",
             "hp": "4200",
             "attack": "180",
             "energy": "50",
@@ -28,7 +28,7 @@
         },
         {
             "name": "Ninqa",
-            "element": "Earth",
+            "pack": "Earth",
             "hp": "3200",
             "attack": "280",
             "energy": "50",
@@ -36,7 +36,7 @@
         },
         {
             "name": "Philles",
-            "element": "Earth",
+            "pack": "Earth",
             "hp": "3200",
             "attack": "280",
             "energy": "50",
@@ -44,7 +44,7 @@
         },
         {
             "name": "Zalx",
-            "element": "Earth",
+            "pack": "Earth",
             "hp": "4000",
             "attack": "200",
             "energy": "50",

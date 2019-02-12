@@ -4,7 +4,7 @@
     "heroes": [
         {
             "name": "Adoel",
-            "element": "Heavens",
+            "pack": "Heavens",
             "hp": "5000",
             "attack": "100",
             "energy": "50",
@@ -12,7 +12,7 @@
         },
         {
             "name": "Hovdur",
-            "element": "Heavens",
+            "pack": "Heavens",
             "hp": "2800",
             "attack": "320",
             "energy": "50",
@@ -20,7 +20,7 @@
         },
         {
             "name": "Ingea",
-            "element": "Heavens",
+            "pack": "Heavens",
             "hp": "4600",
             "attack": "140",
             "energy": "50",
@@ -28,7 +28,7 @@
         },
         {
             "name": "Michael",
-            "element": "Heavens",
+            "pack": "Heavens",
             "hp": "5200",
             "attack": "80",
             "energy": "50",
@@ -36,7 +36,7 @@
         },
         {
             "name": "Tyreos",
-            "element": "Heavens",
+            "pack": "Heavens",
             "hp": "4000",
             "attack": "200",
             "energy": "50",
@@ -44,7 +44,7 @@
         },
         {
             "name": "Vazros",
-            "element": "Heavens",
+            "pack": "Heavens",
             "hp": "4800",
             "attack": "120",
             "energy": "50",
