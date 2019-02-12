@@ -103,7 +103,7 @@ class Client {
     }
 
     async createUser(id) {
-        await this.dbConn.query('INSERT INTO users VALUES (?, ?, ?, ?)', [id, 50, new Date()-0, null])
+        await this.dbConn.query('INSERT INTO users VALUES (?, ?, ?, ?, ?)', [id, 50, new Date()-0, null, null])
         let res = await this.dbConn.query('SELECT * FROM users WHERE id=?', [id])
         return res[0]
     }
@@ -111,7 +111,7 @@ class Client {
     async saveUser(user) {
         if(user.guild != null) user.guild = user.guild.id
         else user.guild = null
-        this.dbConn.query('UPDATE users SET balance=?, guild=? WHERE id=?', [user.balance, user.guild, user.id])
+        this.dbConn.query('UPDATE users SET balance=?, guild=?, element=? WHERE id=?', [user.balance, user.guild, user.element, user.id])
     }
 
     async createGuild(name, ownerID, roleID) {
