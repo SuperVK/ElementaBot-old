@@ -1,3 +1,4 @@
+const elements = ['Bubbles', 'Earth', 'Gravity', 'Heavens', 'Metal', 'Nuclear']
 module.exports = {
 
     desc: 'Displays your profile!',
@@ -6,11 +7,19 @@ module.exports = {
     run: async function(message, client, user) {
         if(message.args[0] == 'setelement') {
             if(message.args[1] == undefined) return message.channel.createMessage(`Usage: .profile setelement elementname`)
-            let element = client.elements.find(el => el.name.toLowerCase().startsWith(message.args[1]))
+            let element = elements.find(el => el.toLowerCase().startsWith(message.args[1]))
             if(element == undefined) return message.channel.createMessage(`That element doesn't exist!`)
-            user.element = element.name
+            user.element = element
             client.saveUser(user)
-            message.channel.createMessage(`Succesfully joined ${element.name}!`)
+            message.channel.createMessage(`Succesfully joined ${element}!`)
+            return
+        } else if(message.args[0] == 'set') {
+            if(message.args[2] == undefined) return message.channel.createMessage(`Usage: .profile setelement elementname`)
+            let element = elements.find(el => el.toLowerCase().startsWith(message.args[2]))
+            if(element == undefined) return message.channel.createMessage(`That element doesn't exist!`)
+            user.element = element
+            client.saveUser(user)
+            message.channel.createMessage(`Succesfully joined ${element}!`)
             return
         }
         let targetID;
