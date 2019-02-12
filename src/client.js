@@ -31,7 +31,8 @@ class Client {
         this.users = []
 
         this.heroes = []
-        this.elements = require(path.join(__dirname, '../data/elements.json'))
+
+        this.packs = []
 
         this.dbConn = null
 
@@ -60,9 +61,11 @@ class Client {
     }
 
     loadHeroes() {
-        let elements = fs.readdirSync(path.join(__dirname, `/../data/info`))
-        for(let element of elements) {
-            this.heroes.push(require(path.join(__dirname, `/../data/info/${element}.json`)))
+        let packs = fs.readdirSync(path.join(__dirname, `/../data/info`))
+        for(let packName of packs) {
+            let pack = require(path.join(__dirname, `/../data/info/${packName}`))
+            this.packs.push(pack)
+            this.heroes = this.heroes.concat(pack.heroes)
         }
         
     }

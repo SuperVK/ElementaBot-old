@@ -3,40 +3,39 @@ module.exports = {
     aliases: ['cards', 'card'],
     run: async function(message, client, user) {
         if(message.args[0] == undefined) {
-            let msg = `**All the elements:**\n\n`
-            let elements = client.elements
-            for(let element in elements) {
-                msg += `> ${elements[element].name}\n`
+            let msg = `**All the packs:**\n\n`
+            for(let pack of clientpacks) {
+                msg += `> ${pack.name}\n`
             }
-            msg += `Do .cards *element* to get all the heroes in those elements`
+            msg += `Do .cards *pack* to get all the heroes in that pack! Eg: .cards bubbles`
             message.channel.createMessage(msg)
         } else {
             let heroes = client.heroes.filter(el => {
-                if(el.element.toLowerCase().startsWith(message.args[0]) && el.name.toLowerCase().startsWith(message.args[1])) return true
+                if(el.pack.toLowerCase().startsWith(message.args[0]) && el.name.toLowerCase().startsWith(message.args[1])) return true
                 if(el.name.toLowerCase().startsWith(message.args[0])) return true
-                if(el.element.toLowerCase().startsWith(message.args[0]) && message.args[1] == undefined) return true
+                if(el.pack.toLowerCase().startsWith(message.args[0]) && message.args[1] == undefined) return true
             })
-            //check if all the heroes are from the same element
-            if(heroes.length > 1 && heroes.filter(el => heroes[0].element == el.element).length == heroes.length) {
-                let msg = `**All the heroes in ${heroes[0].element}:**\n\n`
+            //check if all the heroes are from the same pack
+            if(heroes.length > 1 && heroes.filter(el => heroes[0].pack == el.pack).length == heroes.length) {
+                let msg = `**All the heroes in ${heroes[0].pack}:**\n\n`
                 for(let hero of heroes) {
                     msg += `> ${hero.name}\n`
                 }
-                msg += `Do .cards hero to get the hero in those elements`
+                msg += `Do .card(s) *hero* to get the hero! Eg: .card aquifis`
                 message.channel.createMessage(msg)
             } else if(heroes.length != 0) {
                 let hero = heroes[0]
                 message.channel.createMessage({
                     embed: {
                         title: hero.name,
-                        color: parseInt(client.elements[hero.element.toLowerCase()].color.substring(1), 16),
+                        color: parseInt(client.packs.find(p => p.name = hero.pack.toLowerCase()).color.substring(1), 16),
                         image: {
                             url: hero.url
                         }
                     }
                 })
             } else {
-                message.channel.createMessage(`I couldn't find that element or hero`)
+                message.channel.createMessage(`I couldn't find that pack or hero`)
             }
             
         }
