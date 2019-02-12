@@ -60,17 +60,11 @@ class Client {
     }
 
     loadHeroes() {
-        var elements = fs.readdirSync(path.join(__dirname, '/../data'))
+        let elements = fs.readdirSync(path.join(__dirname, `/../data/info`))
         for(let element of elements) {
-            if(element.includes('.')) continue
-            let heroes = fs.readdirSync(path.join(__dirname, `/../data/${element}`))
-            
-            for(let hero of heroes) {
-                if(!hero.includes('.')) continue
-                let heroName = hero.split('.')[0].replace('_', ' ').replace('-', '.').toLowerCase()
-                this.heroes.push(require(path.join(__dirname, `/../data/${element}/${hero}`)))
-            }
+            this.heroes.push(require(path.join(__dirname, `/../data/info/${element}.json`)))
         }
+        
     }
     /**
      * Starts the bot
