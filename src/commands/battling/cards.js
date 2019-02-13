@@ -4,7 +4,7 @@ module.exports = {
     run: async function(message, client, user) {
         if(message.args[0] == undefined) {
             let msg = `**All the packs:**\n\n`
-            for(let pack of clientpacks) {
+            for(let pack of client.packs) {
                 msg += `> ${pack.name}\n`
             }
             msg += `Do .cards *pack* to get all the heroes in that pack! Eg: .cards bubbles`
