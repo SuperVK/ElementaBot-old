@@ -10,8 +10,9 @@ module.exports = {
             let element = elements.find(el => el.toLowerCase().startsWith(message.args[1]))
             if(element == undefined) return message.channel.createMessage(`That element doesn't exist!`)
             user.element = element
+            user.deck = []
             user.save()
-            message.channel.createMessage(`Succesfully joined ${element}!`)
+            message.channel.createMessage(`Succesfully joined ${element}! Your deck has been wiped too!`)
             return
         } else if(message.args[0] == 'set') {
             if(message.args[2] == undefined) return message.channel.createMessage(`Usage: .profile setelement elementname`)
