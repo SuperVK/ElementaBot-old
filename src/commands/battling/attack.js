@@ -1,4 +1,4 @@
-const Battle = require('../../structures/battle.js')
+
 
 module.exports = {
     desc: 'Attack some thicc as boiii',
