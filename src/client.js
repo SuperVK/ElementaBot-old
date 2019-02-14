@@ -95,20 +95,23 @@ class Client {
             //convert guild ID to actual guild object
             user.guild = await this.getGuild(user.guild)
         }
-        return res[0]
+        //fill for old account
+        if(user.deck == null) user.deck = '[]'
+        user.deck = JSON.parse(user.deck)
+        return new User(res[0], this)
 
     }
 
     async createUser(id) {
-        await this.dbConn.query('INSERT INTO users VALUES (?, ?, ?, ?, ?)', [id, 50, new Date()-0, null, null])
+        await this.dbConn.query('INSERT INTO users VALUES (?, ?, ?, ?, ?, ?)', [id, 50, new Date()-0, null, null, JSON.stringify([])])
         let res = await this.dbConn.query('SELECT * FROM users WHERE id=?', [id])
-        return res[0]
+        return new User(res[0], this)
     }
 
     async saveUser(user) {
         if(user.guild != null) user.guild = user.guild.id
         else user.guild = null
-        this.dbConn.query('UPDATE users SET balance=?, guild=?, element=? WHERE id=?', [user.balance, user.guild, user.element, user.id])
+        this.dbConn.query('UPDATE users SET balance=?, guild=?, element=?, deck=? WHERE id=?', [user.balance, user.guild, user.element, JSON.stringify(user.deck), user.id])
     }
 
     async createGuild(name, ownerID, roleID) {
@@ -133,7 +136,7 @@ class Client {
     }
 
     async saveGuild(guild) {
-        this.dbConn.query('UPDATE guilds SET balance=?, members=? WHERE id=?', [guild.balance, JSON.stringify(guild.members), guild.id])
+        await this.dbConn.query('UPDATE guilds SET balance=?, members=? WHERE id=?', [guild.balance, JSON.stringify(guild.members), guild.id])
     }
 
     _generateRandomCode() {
@@ -146,6 +149,20 @@ class Client {
     }
 
     
+}
+
+class User {
+    constructor(data, client) {
+        for(let key of Object.keys(data)) {
+            this[key] = data[key]
+        }
+        this.client = client
+    }
+    async save() {
+        if(this.guild != null) this.guild = this.guild.id
+        else this.guild = null
+        await this.client.dbConn.query('UPDATE users SET balance=?, guild=?, element=?, deck=? WHERE id=?', [this.balance, this.guild, this.element, JSON.stringify(this.deck), this.id])
+    }
 }
 
 module.exports = Client

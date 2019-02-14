@@ -36,7 +36,7 @@ module.exports = {
                 message.member.addRole(guild.roleID)
                 message.member.addRole('543546856999878657')
                 message.channel.createMessage(`Successfully joined **${guild.name}**`)
-                client.saveUser(user)
+                user.save()
                 client.saveGuild(guild)
                 break;
 
@@ -49,7 +49,7 @@ module.exports = {
                 user.guild.members.splice(user.guild.members.findIndex(id => id == message.author.id), 1)
                 await client.saveGuild(user.guild)
                 user.guild = null
-                client.saveUser(user)
+                user.save()
                 message.channel.createMessage(`Succesfully left ${guild.name}`)
                 break;
             }
@@ -70,7 +70,7 @@ module.exports = {
                     client.deleteGuild(user.guild.id)
                     message.channel.createMessage(`Successfully deleted ${user.guild.name}`)
                     user.guild = null
-                    client.saveUser(user)
+                    user.save()
                     
                 }
                 break;

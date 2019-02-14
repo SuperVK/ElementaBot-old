@@ -10,7 +10,7 @@ module.exports = {
             let element = elements.find(el => el.toLowerCase().startsWith(message.args[1]))
             if(element == undefined) return message.channel.createMessage(`That element doesn't exist!`)
             user.element = element
-            client.saveUser(user)
+            user.save()
             message.channel.createMessage(`Succesfully joined ${element}!`)
             return
         } else if(message.args[0] == 'set') {
@@ -18,7 +18,7 @@ module.exports = {
             let element = elements.find(el => el.toLowerCase().startsWith(message.args[2]))
             if(element == undefined) return message.channel.createMessage(`That element doesn't exist!`)
             user.element = element
-            client.saveUser(user)
+            user.save()
             message.channel.createMessage(`Succesfully joined ${element}!`)
             return
         }

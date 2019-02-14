@@ -38,7 +38,7 @@ Usage: ${client.prefix}dice _bet_
             msg += `Oh, it's a tie, you won't lose nor gain money!`
         }
         message.channel.createMessage(msg)
-        client.saveUser(user)
+        user.save()
 
         
     }
