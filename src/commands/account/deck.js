@@ -41,7 +41,7 @@ module.exports = {
                 break;
             }
             default: {
-                if(user.deck.length == 0) return message.channel.createMessage(`Your deck is empty, you can deploy heroes with .card deploy hero_name, or deploy all your element heroes with .card deploy all!`)
+                if(user.deck.length == 0) return message.channel.createMessage(`Your deck is empty, you can deploy heroes with .deck deploy hero_name, or deploy all your element heroes with .card deploy all!`)
 
                 let msg = `**Current deck layout!**\n\n`
                 for(let hero of user.deck) {
