@@ -157,11 +157,16 @@ class User {
             this[key] = data[key]
         }
         this.client = client
+        this.ownedHeroes = this.getOwnedHeroes()
     }
     async save() {
         if(this.guild != null) this.guild = this.guild.id
         else this.guild = null
         await this.client.dbConn.query('UPDATE users SET balance=?, guild=?, element=?, deck=? WHERE id=?', [this.balance, this.guild, this.element, JSON.stringify(this.deck), this.id])
+    }
+    getOwnedHeroes() {
+        let heroes = this.client.heroes.filter(h => h.pack == this.element)
+        return heroes.map(h => h.name)
     }
 }
 
