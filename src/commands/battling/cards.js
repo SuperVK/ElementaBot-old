@@ -21,7 +21,7 @@ module.exports = {
                 for(let hero of heroes) {
                     msg += `> ${hero.name}\n`
                 }
-                msg += `Do .card(s) *hero* to get the hero! Eg: .card aquifis`
+                msg += `Do .card(s) *hero* to get info about the hero! Eg: .card aquifis`
                 message.channel.createMessage(msg)
             } else if(heroes.length != 0) {
                 let hero = heroes[0]

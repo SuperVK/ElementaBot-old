@@ -7,6 +7,7 @@ module.exports = {
         for(let hero of heroes) {
             msg += `> ${hero.name}\n`
         }
+        msg += `\nThese are all the heroes you own, to see your current deck, do .deck`
         message.channel.createMessage(msg)
     }
 }
