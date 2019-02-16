@@ -5,11 +5,11 @@ module.exports = {
         switch(message.args[0]) {
             case 'add':
             case 'deploy': {
-                if(user.deck.length >= 6) return message.channel.createMessage(`6 heroes is the max, please remove or swap heroes!`)
+                if(user.deck.length >= 4) return message.channel.createMessage(`4 heroes is the max, please remove or swap heroes!`)
                 if(message.args[1] == 'all') {
                     if(user.deck.length != 0) return message.channel.createMessage(`You can only do this with no heroes in the deck, do .deck remove all to.. well remove all`)
                     if(user.element == undefined) return message.channel.createMessage(`You can only this when you have an element, join one with .profile setelement element_name`)
-                    user.deck = client.heroes.filter(h => h.pack == user.element).map(h => h.name)
+                    user.deck = client.heroes.filter(h => h.pack == user.element).map(h => h.name).slice(0, 4)
                     user.save()
                     message.channel.createMessage(`Succesfully deployed all the default heroes`)
                     return
