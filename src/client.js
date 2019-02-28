@@ -33,6 +33,8 @@ class Client {
         this.heroes = []
 
         this.packs = []
+        
+        this.battles = []
 
         this.dbConn = null
 
