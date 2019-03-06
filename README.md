@@ -1,0 +1,4 @@
+# ElementaBot
+
+
+an unfinished bot
