@@ -1,4 +1,5 @@
 # ElementaBot
 
 
-an unfinished bot
+I don't own the rights to the pictures
+
